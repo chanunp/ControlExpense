@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-navbar color="roze">
+    <ion-title icon-start>
+      <ion-icon name='calculator'></ion-icon>
+      other
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-3>
+        <button ion-button color="button" (click)="dateBack()" clear icon-only icon-start>
+          <ion-icon name='arrow-back'></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col col-6>
+        <input type="text" [(ngModel)]="date2" (click)="showDate()" text-center
+          style="background-color: #FFE4E1; border: none; border: 2px solid #FFCCCC; width: 100%; height: 80%;">
+      </ion-col>
+      <ion-col col-3>
+        <button ion-button color="button" (click)="dateNext()" clear icon-only ion-end>
+          <ion-icon name='arrow-forward'></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ionic-calendar-date-picker *ngIf="showdate" (onSelect)="dateSelected($event)"></ionic-calendar-date-picker>
+
+  <ion-card>
+    <ion-item style="background-color: #FFFACD; border: none; border: 2px solid #FFE4B5">
+      <ion-label>จำนวนเงินที่ควบคุม : </ion-label>
+      <ion-input type="text" readonly [(ngModel)]="income"></ion-input>
+    </ion-item>
+    <ion-item style="background-color: #FFFACD; border: none; border: 2px solid #FFE4B5">
+      <ion-label>จำนวนเงินที่จ่าย : </ion-label>
+      <ion-input type="text" readonly [(ngModel)]="expenses"></ion-input>
+    </ion-item>
+    <ion-item style="background-color: #FFFACD; border: none; border: 2px solid #FFE4B5">
+      <ion-label>คงเหลือ : </ion-label>
+      <ion-input type="text" readonly [(ngModel)]="sum"></ion-input>
+    </ion-item>
+  </ion-card>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col col-6 style="background-color: #E6E6FA; border: none; border: 2px solid #9999CC; border-radius: 15px;">
+        <ion-input type="text" placeholder="บันทึกรายละเอียด" [(ngModel)]="description"></ion-input>
+      </ion-col>
+      <ion-col col-4 style="background-color: #E6E6FA; border: none; border: 2px solid #9999CC; border-radius: 15px;">
+        <ion-input type="number" placeholder="จำนวนเงิน" [(ngModel)]="money"></ion-input>
+      </ion-col>
+      <ion-col col-2>
+        <div *ngIf="!overlap">
+          <button ion-button color="button" clear icon-only (click)="addExpenses()">
+            <ion-icon name='download'></ion-icon>
+          </button>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-list>
+    <ion-item *ngFor="let item of list"
+      style="background-color: #F0FFF0; border: none; border: 2px solid #5F9EA0; border-radius: 5px;"
+      (press)="deleteItem(item);">
+      <ion-label>
+        {{item.data.description}}
+      </ion-label>
+      <ion-badge item-end color="list">
+        {{item.data.money}} บาท
+      </ion-badge>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

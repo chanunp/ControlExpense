@@ -1,0 +1,35 @@
+<!-- <ion-header>
+  <ion-navbar>
+    <ion-title>login</ion-title>
+  </ion-navbar>
+</ion-header> -->
+<ion-content padding>
+  <img src="../../assets/imgs/logo.png" alt="logo">
+  <br><br><br>
+
+  <!-- <input type="text" placeholder="Username">
+  <input type="password" placeholder="Passwork"> -->
+
+  <ion-list>
+    <ion-item
+      style="background-color: #FFFACD; color: #535353; border: none;border: 2px solid #FFE4B5; margin-bottom: 10px;">
+      <ion-label floating>Username</ion-label>
+      <ion-input #userInput type="text"></ion-input>
+    </ion-item>
+
+    <ion-item style="background-color: #FFFACD; color: #535353; border: none;border: 2px solid #FFE4B5;">
+      <ion-label floating>Password</ion-label>
+      <ion-input #passInput [type]="passwordType"></ion-input>
+      <ion-icon style="padding-top:25px;" name="eye" [color]="passwordShow === true ? 'dark':'gray'" item-end
+        (click)="togglePassword()">
+      </ion-icon>
+    </ion-item>
+
+    <h6 (click)="regis()">สมัครสมาชิก</h6>
+
+  </ion-list>
+
+  <button color="roze" ion-button class="login" (click)="onClickLoginBtn(userInput.value,passInput.value)">
+    Login
+  </button>
+</ion-content>

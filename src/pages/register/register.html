@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-navbar color="roze">
+    <ion-title>register</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <h1>สมัครสมาชิก</h1>
+  <img src="../../assets/imgs/logo.png" alt="logo">
+  <br><br>
+  <form [formGroup]="checkvalid">
+    <ion-card>
+      <ion-item style="background-color: #FFFACD; color: #535353;">
+        <ion-label stacked>Name :</ion-label>
+        <ion-input placeholder=" กรอกชื่อจริง-นามสกุล" type="text" formControlName="name" [(ngModel)]="user.name">
+        </ion-input>
+      </ion-item>
+      <p ion-text [hidden]="checkvalid.controls.name.valid || submitted === false" color="danger" padding-left>
+        กรุณากรอกข้อมูล
+      </p>
+
+      <ion-item style="background-color: #FFFACD; color: #535353;">
+        <ion-label stacked>Email :</ion-label>
+        <ion-input placeholder="กรอกอีเมล" type="email" formControlName="email" [(ngModel)]="user.email"></ion-input>
+      </ion-item>
+      <p ion-text [hidden]="checkvalid.controls.email.valid || submitted === false" color="danger" padding-left>
+        กรุณากรอกข้อมูล
+      </p>
+
+      <ion-item style="background-color: #FFFACD; color: #535353;">
+        <ion-label stacked>Phone :</ion-label>
+        <ion-input placeholder="กรอกเบอร์โทรศัพท์" type="number" formControlName="tel" [(ngModel)]="user.tel"
+          (keyup)="validTel();">
+        </ion-input>
+      </ion-item>
+      <p ion-text [hidden]="checkvalid.controls.tel.valid || submitted === false" color="danger" padding-left>
+        กรุณากรอกข้อมูล
+      </p>
+      <p ion-text [hidden]="!checktel" color="danger" padding-left>
+        เบอร์โทรเกินจำนวน!
+      </p>
+
+      <ion-item style="background-color: #FFFACD; color: #535353;">
+        <ion-label stacked>Username :</ion-label>
+        <ion-input placeholder="กรอกชื่อที่ใช้เข้าระบบ" type="text" formControlName="username"
+          [(ngModel)]="user.username"></ion-input>
+      </ion-item>
+      <p ion-text [hidden]="checkvalid.controls.username.valid || submitted === false" color="danger">
+        กรุณากรอกข้อมูล
+      </p>
+
+      <ion-item style="background-color: #FFFACD; color: #535353;">
+        <ion-label stacked>Password :</ion-label>
+        <ion-input placeholder="กรอกรหัสผ่าน" type="password" formControlName="password" [(ngModel)]="user.password">
+        </ion-input>
+      </ion-item>
+      <p ion-text [hidden]="checkvalid.controls.password.valid || submitted === false" color="danger">
+        กรุณากรอกข้อมูล
+      </p>
+
+      <ion-item style="background-color: #FFFACD; color: #535353;">
+        <ion-label stacked>Confirm Password :</ion-label>
+        <ion-input placeholder="ยืนยันรหัสผ่าน" #conpass type="password" (focusout)="checkPass()"
+          formControlName="confirm">
+        </ion-input>
+      </ion-item>
+      <p ion-text [hidden]="checkvalid.controls.confirm.valid || submitted === false" color="danger">
+        กรุณากรอกข้อมูล
+      </p>
+    </ion-card>
+    <button ion-button (click)="registerBtn(checkvalid)">สมัคร</button>
+  </form>
+</ion-content>

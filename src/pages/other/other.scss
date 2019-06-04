@@ -1,0 +1,14 @@
+page-other {
+    ion-content{
+        background-image: url(../../assets/imgs/back11.jpg);
+        background-size: cover;
+        text-align: center;
+    }
+}
+.custom-alertDanger {
+    // background-color: #F35E5D !important;
+    // background: #F35E5D  !important;
+    color: red !important;
+    // $alert-md-background-color: #F35E5D;
+    // $alert-ios-background: #F35E5D;
+  }

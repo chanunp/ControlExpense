@@ -1,0 +1,7 @@
+{
+  "name": "Control_expenses",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

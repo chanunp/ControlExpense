@@ -1,0 +1,29 @@
+page-home {
+    ion-content{
+        background-image: url(../../assets/imgs/back11.jpg);
+        background-size: cover;
+        text-align: center;
+    }
+    .img{
+        // margin-top: 5px;
+        width: 160px;
+        text-align: center;
+    }
+    .menu{
+        width: 100%;
+      
+    }
+    ion-segment-button{
+        width: 100%;
+        height: 50%;
+    }
+    ion-card-header {
+        font-weight: bold;
+    }
+    .under {
+        border-bottom: 2px solid #DB7093
+    }
+    .swiper-slide {
+        display: block !important;
+    }
+}

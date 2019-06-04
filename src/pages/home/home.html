@@ -1,0 +1,204 @@
+<ion-header>
+  <ion-navbar hideBackButton="true" color="roze">
+    <ion-title icon-start>
+      <ion-icon name="home"></ion-icon>
+      Home
+    </ion-title>
+
+    <!-- <ion-buttons end>
+      <button ion-button icon-only color="dark" (click)="logoutBtn()">
+        <ion-icon name="exit"></ion-icon>
+        {{out}}
+      </button>
+    </ion-buttons> -->
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-segment [(ngModel)]="page" color="tab" class="menu">
+    <ion-segment-button value="home" icon-start>
+      <ion-icon name="home"></ion-icon>
+      <!-- หน้าหลัก -->
+    </ion-segment-button>
+    <ion-segment-button value="stats" icon-start (click)="segmentChanged();">
+      <ion-icon name="stats"></ion-icon>
+      <!-- ยอดรวมรายจ่าย -->
+    </ion-segment-button>
+  </ion-segment>
+  <br><br>
+  <div [ngSwitch]="page">
+    <div *ngSwitchCase="'home'">
+      <img src="../../assets/imgs/logo.png" alt="logo" class="img">
+      <br><br>
+      <ion-grid>
+        <ion-row tex-center>
+          <ion-col>
+            <button ion-button block icon-start color="pink" (click)="onClickshopBtn()">
+              <ion-icon name='cart'></ion-icon>
+              ช๊อปปิ้ง
+            </button>
+          </ion-col>
+          <ion-col>
+            <button ion-button block icon-start (click)="onClickfoodBtn()">
+              <ion-icon name='pizza'></ion-icon>
+              อาหาร
+            </button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <br>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <button ion-button block icon-start (click)="onClicktravelBtn()">
+              <ion-icon name='train'></ion-icon>
+              เดินทาง
+            </button>
+          </ion-col>
+          <ion-col>
+            <button ion-button block icon-start (click)="onClickexpensesBtn()">
+              <ion-icon name='star'></ion-icon>
+              รายจ่ายจำเป็น
+            </button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <br>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <button ion-button block icon-start (click)="onClickpetBtn()">
+              <ion-icon name='paw'></ion-icon>
+              สัตว์เลี้ยง
+            </button>
+          </ion-col>
+          <ion-col>
+            <button ion-button block icon-start (click)="onClickotherBtn()">
+              <ion-icon name="calculator"></ion-icon>
+              อื่นๆ
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+    <div *ngSwitchCase="'stats'">
+      <ion-slides pager>
+        <ion-slide>
+          <ion-grid>
+            <ion-row>
+              <ion-col col-3>
+                <button ion-button color="button" (click)="dateBack()" clear icon-only icon-start>
+                  <ion-icon name='arrow-back'></ion-icon>
+                </button>
+              </ion-col>
+              <ion-col col-6>
+                <input type="text" [(ngModel)]="date2" (click)="showDate()" text-center
+                  style="background-color: #FFE4E1; border: none; border: 2px solid #FFCCCC; width: 100%; height: 80%;">
+              </ion-col>
+              <ion-col col-3>
+                <button ion-button color="button" (click)="dateNext()" clear icon-only ion-end>
+                  <ion-icon name='arrow-forward'></ion-icon>
+                </button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <ionic-calendar-date-picker *ngIf="showdate" (onSelect)="dateSelected($event)"></ionic-calendar-date-picker>
+
+          <h2><span class="under"> ยอดรวมรายจ่ายประจำเดือน {{monthText}}</span></h2><br>
+          <ion-card>
+            <ion-item style="background-color: #FFFACD; border: none; border: 2px solid #FFE4B5">
+              <ion-label>เงินที่ควบคุม : </ion-label>
+              <ion-input type="text" readonly [(ngModel)]="income"></ion-input>
+            </ion-item>
+            <ion-item style="background-color: #FFFACD; border: none; border: 2px solid #FFE4B5">
+              <ion-label>เงินที่จ่าย : </ion-label>
+              <ion-input type="text" readonly [(ngModel)]="expenses"></ion-input>
+            </ion-item>
+            <ion-item style="background-color: #FFFACD; border: none; border: 2px solid #FFE4B5">
+              <ion-label>คงเหลือ : </ion-label>
+              <ion-input type="text" readonly [(ngModel)]="sum"></ion-input>
+            </ion-item>
+          </ion-card>
+          <br>
+          <ion-item
+            style="background-color:#F0F8FF; border: none; border: 2px solid #5F9EA0;  border-radius: 15px;width: 100%; height: 100%;">
+            <span class="under">กราฟการควบคุมเงิน</span><br><br>
+            <!-- <canvas #doughnutCanvas></canvas> -->
+
+            <canvas #barCanvas></canvas>
+          </ion-item>
+          <ion-item
+            style="background-color:#F0F8FF; border: none; border: 2px solid #5F9EA0;  border-radius: 15px;width: 100%; height: 100%;">
+            <span class="under">กราฟการควบคุมเงิน</span><br><br>
+            <canvas #doughnutCanvas></canvas>
+
+            <!-- <canvas #barCanvas></canvas> -->
+          </ion-item>
+        </ion-slide>
+
+        <ion-slide>
+          <ion-grid>
+            <ion-row>
+              <ion-col col-3>
+                <button ion-button color="button" (click)="dateBack()" clear icon-only icon-start>
+                  <ion-icon name='arrow-back'></ion-icon>
+                </button>
+              </ion-col>
+              <ion-col col-6>
+                <input type="text" [(ngModel)]="date2" (click)="showDate()" text-center
+                  style="background-color: #FFE4E1; border: none; border: 2px solid #FFCCCC; width: 100%; height: 80%;">
+              </ion-col>
+              <ion-col col-3>
+                <button ion-button color="button" (click)="dateNext()" clear icon-only ion-end>
+                  <ion-icon name='arrow-forward'></ion-icon>
+                </button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <ionic-calendar-date-picker *ngIf="showdate" (onSelect)="dateSelected($event)"></ionic-calendar-date-picker>
+
+          <h2><span class="under"> ยอดรวมรายจ่ายประจำปี</span></h2><br>
+          <ion-card>
+            <ion-item style="background-color: #FFFACD; border: none; border: 2px solid #FFE4B5">
+              <ion-label>เงินที่ควบคุม : </ion-label>
+              <ion-input type="text" readonly [(ngModel)]="incomeY"></ion-input>
+            </ion-item>
+            <ion-item style="background-color: #FFFACD; border: none; border: 2px solid #FFE4B5">
+              <ion-label>เงินที่จ่าย : </ion-label>
+              <ion-input type="text" readonly [(ngModel)]="expensesY"></ion-input>
+            </ion-item>
+            <ion-item style="background-color: #FFFACD; border: none; border: 2px solid #FFE4B5">
+              <ion-label>คงเหลือ : </ion-label>
+              <ion-input type="text" readonly [(ngModel)]="sumY"></ion-input>
+            </ion-item>
+          </ion-card>
+          <br>
+          <ion-item
+            style="background-color:#F0F8FF; border: none; border: 2px solid #5F9EA0;  border-radius: 15px;width: 100%; height: 100%;">
+            <span class="under">กราฟการควบคุมเงิน</span><br><br>
+            <!-- <canvas #doughnutCanvas></canvas> -->
+
+            <canvas #barCanvasYear></canvas>
+          </ion-item>
+          <ion-item
+            style="background-color:#F0F8FF; border: none; border: 2px solid #5F9EA0;  border-radius: 15px;width: 100%; height: 100%;">
+            <span class="under">กราฟรายจ่ายทั้งหมด</span><br><br>
+            <canvas #doughnutCanvasY></canvas>
+
+            <!-- <canvas #barCanvas></canvas> -->
+          </ion-item>
+        </ion-slide>
+      </ion-slides>
+    </div>
+  </div>
+  <br><br><br><br>
+
+  <ion-fab bottom right>
+    {{out}}
+    <button ion-fab color="dark" (click)="logoutBtn()">
+      Log out</button>
+  </ion-fab>
+
+
+</ion-content>

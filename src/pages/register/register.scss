@@ -1,0 +1,39 @@
+page-register {
+    ion-content{
+        background-image: url("../../assets/imgs/back12.jpg");
+        background-size: cover;
+        text-align: center;
+    }
+    img{
+        // margin-top: 30px;
+        width: 120px;
+    }
+    button{
+        -webkit-box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+        box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+        margin: 0px;
+    }
+    button:hover{
+        color: #B22222;
+    }
+    .login{
+        text-align: center;
+        border: none;
+        // padding: 1px 80px;
+        text-decoration: none;
+        display: inline-block;
+        text-transform: uppercase;
+        font-size: 13px;
+        transition: all 0.3s ease-in-out;
+        width: 85%;
+        height: 35px;
+        color: #ffffff;
+    }
+    ion-card{
+        border: none;
+        border: 2px solid #FFE4B5;
+    }
+    p{
+        background-color: #FFE4B5; 
+    }
+}
